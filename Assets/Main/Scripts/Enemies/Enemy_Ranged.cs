@@ -14,19 +14,18 @@ public class Enemy_Ranged : Enemy
         base.Setup();
     }
 
-    public override IEnumerator Moving()
+    /*public override IEnumerator Moving()
     {
         while (true)
         {
+            moveDirection = player.transform.position;
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
 
             FlipSprite();
 
-            Attack();
-
             yield return new WaitForEndOfFrame();
         }
-    }
+    }*/
 
 
     public override void Attack()

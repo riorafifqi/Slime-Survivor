@@ -28,14 +28,17 @@ public class HealthBar : MonoBehaviour
         healthfill.fillAmount = enemyHealthPercentage;
     }
 
+    private void Update()
+    {
+        SetHealth();
+    }
+
     public IEnumerator UpdateHealthBar()
     {
         while (enemy != null)
         {
             Vector3 screenPos = Camera.main.WorldToScreenPoint(enemy.transform.position);
             this.transform.position = screenPos + offset;
-
-            SetHealth();
 
             yield return new WaitForEndOfFrame();
         }

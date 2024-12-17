@@ -168,10 +168,11 @@ MonoBehaviour:
   name: Range Slime
   maxHealth: 10
   speed: 0
-  attackRange: 0
+  attackRange: 50
   attackDamage: 2
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
   attackCooldown: 5
   lifeTime: 0
+  isSingleDirectional: 0

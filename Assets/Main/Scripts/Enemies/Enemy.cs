@@ -9,11 +9,13 @@ public class Enemy : MonoBehaviour
     int currentHealth;
     [SerializeField] protected float speed;
     [SerializeField] protected float attackRange;
+    protected Vector2 moveDirection;
     [SerializeField] protected int attackDamage;
     [SerializeField] LayerMask enemyLayerMask;
     [SerializeField] protected float attackCooldown;
     [SerializeField] protected float lifeTime = 0;      // 0 to disable lifeTime
-    protected bool canAttack = true;
+    [SerializeField] bool isSingleDirectional = false;
+    protected bool canAttack = true;    
 
     protected PlayerStats player;
     SpriteRenderer spriteRenderer;
@@ -32,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Setup()
     {
-        StartCoroutine(Moving());
+        //StartCoroutine(Moving());
 
         StartCoroutine(CountLifetime());
     }
@@ -54,32 +56,21 @@ public class Enemy : MonoBehaviour
             Attack();
         }
     }
-    public virtual IEnumerator Moving()
-    {
-        //animator.SetBool("isMoving", true);
 
+    /*public virtual IEnumerator Moving()
+    {
         // Move to player
         while (true)
         {
-            /*Vector2 direction = ((Vector2)player.transform.position - (Vector2)transform.position).normalized;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, speed * Time.deltaTime, enemyLayerMask);
+            moveDirection = player.transform.position;
 
-            Debug.Log(hit.collider, hit.collider);
-
-            if (hit.collider == null)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-
-                FlipSprite();
-            }*/
-
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, moveDirection, speed * Time.deltaTime);
 
             FlipSprite();
 
             yield return new WaitForEndOfFrame();
         }
-    }
+    }*/
 
     private IEnumerator CountLifetime()
     {
@@ -159,5 +150,20 @@ public class Enemy : MonoBehaviour
     public string GetName()
     {
         return name;
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public bool GetMoveMethod()
+    {
+        return isSingleDirectional;
+    }
+
+    public Vector2 GetMoveTarget()
+    {
+        return moveDirection;
     }
 }
