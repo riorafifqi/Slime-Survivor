@@ -13,13 +13,8 @@ public class HealthBarManager : MonoBehaviour
     [SerializeField] HealthBar healthBarPrefab;
     [SerializeField] Transform healthBarCollection;
 
-    NativeList<HealthBarData> healthBarDataList;
-    NativeArray<float2> newPositions;
-
     void Start()
     {
-        healthBarDataList = new NativeList<HealthBarData>(Allocator.Persistent);
-
         healthBarPool = new(() =>
         {
             return Instantiate(healthBarPrefab, healthBarCollection);
@@ -44,19 +39,5 @@ public class HealthBarManager : MonoBehaviour
     {
         healthBar.Terminate();
         healthBarPool.Release(healthBar);
-    }
-}
-
-public struct HealthBarData
-{
-    public Vector2 position;
-    public Vector2 enemyPositon;
-}
-
-public struct HealthBarJob : IJobParallelFor
-{
-    public void Execute(int index)
-    {
-        throw new System.NotImplementedException();
     }
 }
